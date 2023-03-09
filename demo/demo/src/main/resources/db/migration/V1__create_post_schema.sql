@@ -1,0 +1,21 @@
+CREATE TABLE comment (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   author VARCHAR(200) NULL,
+   text VARCHAR(4000) NULL,
+   published datetime NULL,
+   post_id BIGINT NULL,
+   comment_id BIGINT NULL,
+   CONSTRAINT pk_comment PRIMARY KEY (id)
+);
+
+CREATE TABLE post (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   post_name VARCHAR(200) NULL,
+   text VARCHAR(4000) NULL,
+   published datetime NULL,
+   CONSTRAINT pk_post PRIMARY KEY (id)
+);
+
+ALTER TABLE comment ADD CONSTRAINT FK_COMMENT_ON_COMMENT FOREIGN KEY (comment_id) REFERENCES post (id);
+
+ALTER TABLE comment ADD CONSTRAINT FK_COMMENT_ON_POST FOREIGN KEY (post_id) REFERENCES post (id);
