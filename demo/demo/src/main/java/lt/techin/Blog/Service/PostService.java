@@ -11,16 +11,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
 @Service
 public class PostService {
-
-    private final PostRepository postRepository;
-    private final CommentRepository commentRepository;
-
     @Autowired
-    public PostService(PostRepository postRepository, CommentRepository commentRepository) {
+    private final PostRepository postRepository;
+
+
+    public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
-        this.commentRepository = commentRepository;
     }
 
     public List<Post> getAll() {
@@ -35,21 +34,13 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Comment> getAllCommentsById(Long postId) {
-        return postRepository.findById(postId).get().getCommentList();
+    public Optional<Post> getPostByPostName(String postName) {
+        return postRepository.findByPostName(postName);
     }
 
-    public Post addCommentToPost(Long postId, Long commentId) {
-        var existingPost = postRepository.findById(postId)
-                .orElseThrow(() -> new BlogValidationException("Post does not exist",
-                        "id", "Post not found", postId.toString()));
+//    public List<Post> getAllPostsOrdered() {
+//        return postRepository.findAllByOrderByPublishedDesc();
+//    }
 
-        var existingComment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new BlogValidationException("Comment does not exist",
-                        "id", "Comment not found", commentId.toString()));
 
-        existingPost.getCommentList().add(existingComment);
-
-        return postRepository.save(existingPost);
-    }
 }

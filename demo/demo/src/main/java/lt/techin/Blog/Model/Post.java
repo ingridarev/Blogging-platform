@@ -26,9 +26,7 @@ public class Post {
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime published;
-    @OneToMany
-    @JoinColumn(name = "Comment_id")
-    private List<Comment> commentList = new ArrayList<>();
+
     @PrePersist
     public void prePersist() {
         published = LocalDateTime.now();
@@ -36,12 +34,11 @@ public class Post {
 
     public Post(){}
 
-    public Post(Long id, String postName, String text, LocalDateTime published,List<Comment> commentList) {
+    public Post(Long id, String postName, String text, LocalDateTime published) {
         this.id = id;
         this.postName = postName;
         this.text = text;
         this.published = published;
-        this.commentList = commentList;
     }
 
     public Long getId() {
@@ -76,25 +73,17 @@ public class Post {
         this.published = published;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return Objects.equals(id, post.id) && Objects.equals(postName, post.postName) && Objects.equals(text, post.text) && Objects.equals(published, post.published) && Objects.equals(commentList, post.commentList);
+        return Objects.equals(id, post.id) && Objects.equals(postName, post.postName) && Objects.equals(text, post.text) && Objects.equals(published, post.published);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, postName, text, published, commentList);
+        return Objects.hash(id, postName, text, published);
     }
 
     @Override
@@ -104,7 +93,6 @@ public class Post {
                 ", postName='" + postName + '\'' +
                 ", text='" + text + '\'' +
                 ", published=" + published +
-                ", commentList=" + commentList +
                 '}';
     }
 }

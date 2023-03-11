@@ -9,5 +9,5 @@ import java.util.Set;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Comment> findAllByPost_IdOrderByPublishedDesc(Long postId);
+    List<Comment> findAllByPost(Post post);
 }

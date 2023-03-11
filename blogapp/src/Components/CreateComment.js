@@ -5,7 +5,7 @@ import { Button, Form, Grid, TextArea, Card } from "semantic-ui-react";
 
 export function CreateComment() {
   const params = useParams();
-  const listUrl = useHref("/view/:id");
+  const listUrl = useHref("/:id");
   const [post, setPost] = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");

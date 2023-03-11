@@ -1,9 +1,6 @@
 package lt.techin.Blog.api.dto;
 
-import lt.techin.Blog.Model.Comment;
-
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 public class PostEntityDto extends PostDto{
@@ -12,12 +9,12 @@ public class PostEntityDto extends PostDto{
 
     public PostEntityDto(){}
 
-    public PostEntityDto(Long id) {
+    public PostEntityDto(String postName, String text, LocalDateTime published, Long id) {
+        super(postName, text, published);
         this.id = id;
     }
 
-    public PostEntityDto(String postName, String text, LocalDateTime published, List<Comment> commentList, Long id) {
-        super(postName, text, published, commentList);
+    public PostEntityDto(Long id) {
         this.id = id;
     }
 

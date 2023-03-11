@@ -5,18 +5,18 @@ import lt.techin.Blog.Model.Post;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class CommentEntityDto extends CommentDto{
+public class CommentEntityDto extends CommentDto {
 
-    private Long id;
+    private Long id ;
 
     public CommentEntityDto(){}
 
-    public CommentEntityDto(Long id) {
+    public CommentEntityDto(String author, String text, LocalDateTime published, Post post, Long id) {
+        super(author, text, published, post);
         this.id = id;
     }
 
-    public CommentEntityDto(String author, String text, LocalDateTime published, Post post, Long id) {
-        super(author, text, published, post);
+    public CommentEntityDto(Long id) {
         this.id = id;
     }
 

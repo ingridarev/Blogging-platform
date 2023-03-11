@@ -11,7 +11,7 @@ export function ViewPosts() {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
-    fetch(`/api/v1/posts/`)
+    fetch(`/api/v1/posts`)
       .then((response) => response.json())
       .then((jsonRespones) => setPosts(jsonRespones));
   };
@@ -37,7 +37,7 @@ export function ViewPosts() {
                     <Card.Description>{post.text}</Card.Description>
                     <Card.Meta className="button1">
                       <Button className="button1">
-                        <Link to={"/view/" + post.id}>Skaityti daugiau</Link>
+                        <Link to={"/" + post.id}>Skaityti daugiau</Link>
                       </Button>
                     </Card.Meta>
                   </Card.Content>

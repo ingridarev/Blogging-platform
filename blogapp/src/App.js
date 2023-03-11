@@ -6,7 +6,6 @@ import { ViewPosts } from './Components/ViewPosts';
 import { CreatePost } from './Components/CreatePost';
 import { SeePost } from './Components/SeePost';
 import { CreateComment } from './Components/CreateComment';
-import { ViewComments } from './Components/ViewComments';
 import { Menu } from './Components/Menu';
 import 'semantic-ui-css/semantic.min.css';
 import {
@@ -32,9 +31,8 @@ function App() {
         <Routes>
           <Route path="/create" element={<CreatePost/>} />
           <Route path='/' element={<ViewPosts />} />
-          <Route path='/view/:id' element={<SeePost />} />
+          <Route path='/:id' element={<SeePost />} />
           <Route path='/createComment' element={<CreateComment />} />
-          <Route path='/comments' element={<ViewComments />} />
         </Routes>
 
       </HashRouter>

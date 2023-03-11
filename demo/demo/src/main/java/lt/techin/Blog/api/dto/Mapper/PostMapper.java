@@ -1,14 +1,10 @@
 package lt.techin.Blog.api.dto.Mapper;
 
-import lt.techin.Blog.Model.Comment;
 import lt.techin.Blog.Model.Post;
-import lt.techin.Blog.api.dto.CommentDto;
-import lt.techin.Blog.api.dto.CommentEntityDto;
 import lt.techin.Blog.api.dto.PostDto;
 import lt.techin.Blog.api.dto.PostEntityDto;
 
 public class PostMapper {
-
 
     public static PostDto toPostDto(Post post) {
         var postDto = new PostDto();
@@ -19,7 +15,6 @@ public class PostMapper {
 
         return postDto;
     }
-
     public static PostEntityDto toPostEntityDto(Post post) {
         var postDto = new PostEntityDto();
 
@@ -30,7 +25,6 @@ public class PostMapper {
 
         return postDto;
     }
-
     public static Post toPost(PostDto postDto) {
         var post = new Post();
 
@@ -41,7 +35,7 @@ public class PostMapper {
         return post;
     }
 
-    public static Post toPostFromEntityDto(PostEntityDto postDto) {
+    public static Post toPostEntityDto(PostEntityDto postDto) {
         var post = new Post();
 
         post.setId(postDto.getId());

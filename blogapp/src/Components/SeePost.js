@@ -3,17 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import {
   Button,
   Grid,
-  Icon,
-  Input,
-  Segment,
-  Table,
   Divider,
-  List,
-  Form,
-  Select,
   Card,
   Header,
-  TextArea,
   Comment,
 } from "semantic-ui-react";
 
@@ -24,23 +16,20 @@ const JSON_HEADERS = {
 export function SeePost() {
   const params = useParams();
   const [comments, setComments] = useState([]);
-  const [posts, setPosts] = useState({
-    postName: "",
-    text: "",
-    modifiedDate: "",
-  });
+  const [post, setPost] = useState({});
+ 
 
   useEffect(() => {
-    fetch("/api/v1/posts/view/" + params.id)
+    fetch("/api/v1/posts/" + params.id)
       .then((response) => response.json())
-      .then(setPosts);
+      .then(setPost);
   }, [params]);
 
   useEffect(() => {
-    fetch(`/api/v1/posts/${params.id}/comments/`)
+    fetch("/api/v1/comments/" + params.id)
       .then((response) => response.json())
       .then(setComments);
-  }, [params]);
+  }, []);
 
   return (
     <div>
@@ -50,9 +39,9 @@ export function SeePost() {
           <Card.Group >
             <Card fluid>
               <Card.Content >
-                <Card.Header>{posts.postName}</Card.Header>
-                <Card.Meta>{posts.published}</Card.Meta>
-                <Card.Description>{posts.text}</Card.Description>
+                <Card.Header>{post.postName}</Card.Header>
+                <Card.Meta>{post.published}</Card.Meta>
+                <Card.Description>{post.text}</Card.Description>
               </Card.Content>
             </Card>
           </Card.Group>
@@ -64,7 +53,6 @@ export function SeePost() {
               </Button>
             </Link>
           </Grid.Row>
-          {/* <ViewComments /> */}
 
           <Comment.Group>
             <Header as="h3" dividing>
@@ -89,3 +77,6 @@ export function SeePost() {
     </div>
   );
 }
+
+export default SeePost;
+

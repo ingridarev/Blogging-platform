@@ -4,7 +4,6 @@ import lt.techin.Blog.Model.Comment;
 import lt.techin.Blog.Model.Post;
 import lt.techin.Blog.api.dto.CommentDto;
 import lt.techin.Blog.api.dto.CommentEntityDto;
-import lt.techin.Blog.api.dto.PostDto;
 import lt.techin.Blog.api.dto.PostEntityDto;
 
 public class CommentMapper {
@@ -15,7 +14,6 @@ public class CommentMapper {
         commentDto.setAuthor(comment.getAuthor());
         commentDto.setText(comment.getText());
         commentDto.setPublished(comment.getPublished());
-        commentDto.setPost(comment.getPost());
 
         return commentDto;
     }
@@ -27,7 +25,7 @@ public class CommentMapper {
         commentDto.setAuthor(comment.getAuthor());
         commentDto.setText(comment.getText());
         commentDto.setPublished(comment.getPublished());
-        commentDto.setPost(comment.getPost());
+
 
         return commentDto;
     }
@@ -38,7 +36,6 @@ public class CommentMapper {
         comment.setAuthor(commentDto.getAuthor());
         comment.setText(commentDto.getText());
         comment.setPublished(commentDto.getPublished());
-        comment.setPost(commentDto.getPost());
 
         return comment;
     }
@@ -50,8 +47,8 @@ public class CommentMapper {
         comment.setAuthor(commentDto.getAuthor());
         comment.setText(commentDto.getText());
         comment.setPublished(commentDto.getPublished());
-        comment.setPost(commentDto.getPost());
 
         return comment;
     }
+
 }
