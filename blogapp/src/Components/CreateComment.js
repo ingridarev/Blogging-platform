@@ -3,12 +3,27 @@ import { useHref, useParams, Link } from "react-router-dom";
 
 import { Button, Form, Grid, TextArea, Card } from "semantic-ui-react";
 
-export function CreateComment() {
-  const params = useParams();
+export function CreateComment(props) {
+  // const params = useParams();
   const listUrl = useHref("/:id");
-  const [post, setPost] = useState("");
+  // const [post, setPost] = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
+
+  const createComment = async () => {
+    fetch(`api/v1/posts/comments/` + props.postId, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        author,
+        text,
+      }),
+    })
+      .then(applyResult)
+      .then(() => (window.location = listUrl));
+  };
 
   const clear = () => {
     setAuthor("");
@@ -25,21 +40,6 @@ export function CreateComment() {
           result.status
       );
     }
-  };
-
-  const createComment = async () => {
-    fetch(`api/v1/comments/${post.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        author,
-        text,
-      }),
-    })
-      .then(applyResult)
-      .then(() => (window.location = listUrl));
   };
 
   return (
@@ -71,7 +71,7 @@ export function CreateComment() {
               color='blue'
               onClick={createComment}
             >
-              <Link to={"/view/" + post.id}>Komentuoti</Link>
+              <Link to={"/" + props.id}>Komentuoti</Link>
             </Button>
           </Form>
         </Grid.Column>

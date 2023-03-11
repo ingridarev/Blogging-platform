@@ -24,10 +24,10 @@ export function SeePost() {
     fetch("/api/v1/posts/" + params.id)
       .then((response) => response.json())
       .then(setPost);
-  }, [params]);
+  }, [params.id]);
 
   useEffect(() => {
-    fetch("/api/v1/comments/" + params.id)
+    fetch("/api/v1/posts/comments/" + params.id)
       .then((response) => response.json())
       .then(setComments);
   }, []);

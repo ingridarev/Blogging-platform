@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.ResponseEntity.ok;
 
 @Controller
-@RequestMapping("/api/v1/comments")
+@RequestMapping("/api/v1/posts/comments")
 @Validated
 public class CommentController {
     public static Logger logger = LoggerFactory.getLogger(CommentController.class);
@@ -46,16 +46,6 @@ public class CommentController {
         return ResponseEntity.ok(commentService.createComment(postId, commentDto));
     }
 
-//    @GetMapping(value = "/{commentId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-//    public ResponseEntity<Comment> getComment(@PathVariable Long commentId) {
-//        var commentOptional = commentService.getById(commentId);
-//
-//        var responseEntity = commentOptional
-//                .map(comment -> ok(comment))
-//                .orElseGet(() -> ResponseEntity.notFound().build());
-//
-//        return responseEntity;
-//    }
 
     @GetMapping("/{postId}")
     @ResponseBody
