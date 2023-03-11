@@ -46,11 +46,15 @@ private final PostService postService;
 
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
-
-            var createdPost = postService.create(toPost(postDto));
-            return ok(toPostDto(createdPost));
+    @ResponseBody
+    public ResponseEntity<Post> createPost(@Valid @RequestBody PostDto postDto) {
+        if (postService.getPostByPostName(postDto.getPostName()).isEmpty()) {
+            return ResponseEntity.ok(postService.createPost(PostMapper.toPost(postDto)));
+        } else {
+            return ResponseEntity.badRequest().build();
         }
+    }
+
 
     @GetMapping(value = "/{postId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Post> getPost(@PathVariable Long postId) {

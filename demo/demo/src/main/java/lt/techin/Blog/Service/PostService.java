@@ -30,7 +30,7 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public Post create(Post post) {
+    public Post createPost(Post post) {
         return postRepository.save(post);
     }
 

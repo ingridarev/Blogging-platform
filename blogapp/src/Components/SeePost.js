@@ -8,6 +8,7 @@ import {
   Header,
   Comment,
 } from "semantic-ui-react";
+import { Menu } from "./Menu";
 
 const JSON_HEADERS = {
   "Content-Type": "application/json",
@@ -36,6 +37,7 @@ export function SeePost() {
       <Grid columns={3}>
         <Grid.Column width={6}></Grid.Column>
         <Grid.Column width={6}>
+        <Menu />
           <Card.Group >
             <Card fluid>
               <Card.Content >

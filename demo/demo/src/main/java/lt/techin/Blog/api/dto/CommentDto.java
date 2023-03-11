@@ -20,7 +20,7 @@ public class CommentDto {
     private String author;
 
     private String text;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime published;
 
     private Post post ;

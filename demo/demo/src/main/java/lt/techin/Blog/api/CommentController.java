@@ -41,8 +41,9 @@ public class CommentController {
 
 
     @PostMapping("/{postId}")
+    @ResponseBody
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody CommentDto commentDto) {
-        return ResponseEntity.ok(commentService.create(postId, commentDto));
+        return ResponseEntity.ok(commentService.createComment(postId, commentDto));
     }
 
 //    @GetMapping(value = "/{commentId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})

@@ -20,6 +20,7 @@ public class PostDto {
     private String postName;
 
     private String text;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime published;
 
 }

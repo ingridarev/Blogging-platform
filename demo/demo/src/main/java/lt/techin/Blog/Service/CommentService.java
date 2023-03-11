@@ -46,7 +46,7 @@ public class CommentService {
     }
 
 
-    public Comment create(Long postId, CommentDto commentDto) {
+    public Comment createComment(Long postId, CommentDto commentDto) {
 
         var post = postRepository.findById(postId).orElseThrow();
         Comment newComment = CommentMapper.toComment(commentDto);
