@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHref, useParams, Link } from "react-router-dom";
 
-import { Button, Form, Grid, TextArea, Card } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  TextArea,
+  Divider,
+  Comment,
+  Header,
+} from "semantic-ui-react";
 
-export function CreateComment(props) {
-  // const params = useParams();
-  const listUrl = useHref("/:id");
-  // const [post, setPost] = useState("");
+export function CreateComment() {
+  const params = useParams();
+  const listUrl = useHref(`/${params.id}`);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
+  const [comments, setComments] = useState([]);
 
-  const createComment = async () => {
-    fetch(`api/v1/posts/comments/` + props.postId, {
+  const createComment = () => {
+    fetch(`/api/v1/posts/comments/${params.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,10 +50,16 @@ export function CreateComment(props) {
     }
   };
 
+  useEffect(() => {
+    fetch(`/api/v1/posts/comments/${params.id}`)
+      .then((response) => response.json())
+      .then(setComments);
+  }, [params.id]);
+
   return (
     <div>
-      <Grid columns={3}>
-        <Grid.Column width={5}></Grid.Column>
+      <Divider hidden />
+      <Grid centered>
         <Grid.Column width={6}>
           <Form>
             <Form.Field>
@@ -67,15 +81,33 @@ export function CreateComment(props) {
             <Button
               type="submit"
               className="controls"
-              basic 
-              color='blue'
+              basic
+              color="blue"
               onClick={createComment}
             >
-              <Link to={"/" + props.id}>Komentuoti</Link>
+              Komentuoti
+              {/* <Link to={"/" + params.id}>Komentuoti</Link> */}
             </Button>
           </Form>
+
+          <Comment.Group>
+            <Header as="h3" dividing>
+              Komentarai
+            </Header>
+            <Comment>
+              {comments.map((comment) => (
+                <Comment.Content key={comment.id}>
+                  <Comment.Author as="a">{comment.author}</Comment.Author>
+                  <Comment.Metadata>
+                    <div>{comment.published}</div>
+                  </Comment.Metadata>
+                  <Comment.Text>{comment.text}</Comment.Text>
+                  <Divider hidden />
+                </Comment.Content>
+              ))}
+            </Comment>
+          </Comment.Group>
         </Grid.Column>
-        <Grid.Column width={5}></Grid.Column>
       </Grid>
     </div>
   );

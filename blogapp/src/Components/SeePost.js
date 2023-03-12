@@ -8,6 +8,7 @@ import {
   Header,
   Comment,
 } from "semantic-ui-react";
+import { CreateComment } from "./CreateComment";
 import { Menu } from "./Menu";
 
 const JSON_HEADERS = {
@@ -16,9 +17,7 @@ const JSON_HEADERS = {
 
 export function SeePost() {
   const params = useParams();
-  const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
- 
 
   useEffect(() => {
     fetch("/api/v1/posts/" + params.id)
@@ -26,21 +25,15 @@ export function SeePost() {
       .then(setPost);
   }, [params.id]);
 
-  useEffect(() => {
-    fetch("/api/v1/posts/comments/" + params.id)
-      .then((response) => response.json())
-      .then(setComments);
-  }, []);
-
   return (
     <div>
       <Grid columns={3}>
         <Grid.Column width={6}></Grid.Column>
         <Grid.Column width={6}>
-        <Menu />
-          <Card.Group >
+          <Menu />
+          <Card.Group>
             <Card fluid>
-              <Card.Content >
+              <Card.Content>
                 <Card.Header>{post.postName}</Card.Header>
                 <Card.Meta>{post.published}</Card.Meta>
                 <Card.Description>{post.text}</Card.Description>
@@ -48,37 +41,10 @@ export function SeePost() {
             </Card>
           </Card.Group>
           <Divider hidden />
-          <Grid.Row centered>
-            <Link to="/createComment">
-              <Button basic color="blue">
-                Rašyti naują komentarą
-              </Button>
-            </Link>
-          </Grid.Row>
-
-          <Comment.Group>
-            <Header as="h3" dividing>
-              Komentarai
-            </Header>
-            <Comment>
-              {comments.map((comment) => (
-                <Comment.Content key={comment.id}>
-                  <Comment.Author as="a">{comment.author}</Comment.Author>
-                  <Comment.Metadata>
-                    <div>{comment.published}</div>
-                  </Comment.Metadata>
-                  <Comment.Text>{comment.text}</Comment.Text>
-                  <Divider hidden/>
-                </Comment.Content>
-              ))}
-            </Comment>
-          </Comment.Group>
+          <CreateComment />
         </Grid.Column>
         <Grid.Column width={6}></Grid.Column>
       </Grid>
     </div>
   );
 }
-
-export default SeePost;
-
