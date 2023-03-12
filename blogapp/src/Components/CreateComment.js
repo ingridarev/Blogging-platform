@@ -60,7 +60,7 @@ export function CreateComment() {
     <div>
       <Divider hidden />
       <Grid centered>
-        <Grid.Column width={6}>
+        <Grid.Column>
           <Form>
             <Form.Field>
               <label>Komentaro autorius</label>

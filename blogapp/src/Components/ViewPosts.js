@@ -27,16 +27,16 @@ export function ViewPosts() {
           <Grid.Column width={6}></Grid.Column>
           <Grid.Column width={6} textAlign="center">
             <Menu />
-            <Divider hidden />
-            <Card.Group>
+            <Divider hidden /> 
+            <Card.Group >
               {posts.map((post) => (
-                <Card key={post.id} fluid>
-                  <Card.Content>
+                <Card key={post.id} fluid >
+                  <Card.Content >
                     <Card.Header>{post.postName}</Card.Header>
                     <Card.Meta>{post.published}</Card.Meta>
                     <Card.Description>{post.text}</Card.Description>
                     <Card.Meta className="button1">
-                      <Button className="button1">
+                      <Button className="button1" >
                         <Link to={"/" + post.id}>Skaityti daugiau</Link>
                       </Button>
                     </Card.Meta>
