@@ -13,7 +13,7 @@ import {
 
 export function CreateComment() {
   const params = useParams();
-  const listUrl = useHref(`/${params.id}`);
+  // const listUrl = useHref(`/${params.id}`);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
@@ -30,7 +30,7 @@ export function CreateComment() {
       }),
     })
       .then(applyResult)
-      .then(() => (window.location = listUrl));
+      // .then(() => (window.location = listUrl));
   };
 
   const clear = () => {
@@ -41,6 +41,9 @@ export function CreateComment() {
   const applyResult = (result) => {
     if (result.ok) {
       clear();
+      fetch(`/api/v1/posts/comments/${params.id}`)
+      .then((response) => response.json())
+      .then(setComments);
     } else {
       document.getElementById("author").style.borderColor = "red";
       window.alert(
@@ -86,7 +89,6 @@ export function CreateComment() {
               onClick={createComment}
             >
               Leave comment
-              {/* <Link to={"/" + params.id}>Komentuoti</Link> */}
             </Button>
           </Form>
 
