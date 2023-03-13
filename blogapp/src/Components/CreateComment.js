@@ -63,17 +63,17 @@ export function CreateComment() {
         <Grid.Column>
           <Form>
             <Form.Field>
-              <label>Komentaro autorius</label>
+              <label>Comment author</label>
               <input
-                placeholder="Įrašo pavadinimas"
+                placeholder="Author"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
               />
             </Form.Field>
             <Form.Field>
-              <label>Komentaro tekstas</label>
+              <label>Comment text</label>
               <TextArea
-                placeholder="Komentaro tekstas"
+                placeholder="Text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
@@ -85,14 +85,14 @@ export function CreateComment() {
               color="blue"
               onClick={createComment}
             >
-              Komentuoti
+              Leave comment
               {/* <Link to={"/" + params.id}>Komentuoti</Link> */}
             </Button>
           </Form>
 
           <Comment.Group>
             <Header as="h3" dividing>
-              Komentarai
+              Comments
             </Header>
             <Comment>
               {comments.map((comment) => (

@@ -9,6 +9,7 @@ const JSON_HEADERS = {
 
 export function ViewPosts() {
   const [posts, setPosts] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   const fetchPosts = async () => {
     fetch(`/api/v1/posts`)
@@ -27,17 +28,22 @@ export function ViewPosts() {
           <Grid.Column width={6}></Grid.Column>
           <Grid.Column width={6} textAlign="center">
             <Menu />
-            <Divider hidden /> 
-            <Card.Group >
+            <Divider hidden />
+            <Card.Group>
               {posts.map((post) => (
-                <Card key={post.id} fluid >
-                  <Card.Content >
+                <Card key={post.id} fluid>
+                  <Card.Content>
                     <Card.Header>{post.postName}</Card.Header>
                     <Card.Meta>{post.published}</Card.Meta>
-                    <Card.Description>{post.text}</Card.Description>
+
+                    <Card.Description>
+                      {showMore
+                        ? post.text
+                        : `${post.text.substring(0, 170)}...`}
+                    </Card.Description>
                     <Card.Meta className="button1">
-                      <Button className="button1" >
-                        <Link to={"/" + post.id}>Skaityti daugiau</Link>
+                      <Button className="button1">
+                        <Link to={"/" + post.id}>Show more</Link>
                       </Button>
                     </Card.Meta>
                   </Card.Content>
